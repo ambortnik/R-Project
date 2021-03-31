@@ -1,0 +1,100 @@
+---
+title: "Helpline Quarterly Report"
+author: "Anita Blackstaffe"
+date: "24/03/2021"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, include=FALSE}
+library(tidyverse)
+library(janitor)
+```
+
+```{r, include=FALSE}
+# Import full crisis dataset
+crisis <- read_csv("data/_Data_Crisis Line_2020-01-01 to 2020-10-31.csv")
+View(crisis)
+```
+
+```{r, include=FALSE}
+# Import full info line dateset
+info <- read_csv("data/_Data_Info Line_2020-01-01 to 2020-09-30.csv")
+View(info)
+```
+
+# Introduction
+
+The Help Centre provides monthly data from two sources:
+
+ 1. Calls/Texts/Chats to the **Information Line**
+ 1. Calls/Texts/Chats to the **Crisis Line**
+
+This report gives an overview of data from these two sources for the period **January 1, 2020 to March 31, 2020**.
+
+### Contents of Report
+
+1. Number of Contacts
+1. Overall Demographics of Contacts
+1. COVID-19 Related Contacts
+1. Needs and Concerns 
+1. Special Needs and Concerns during COVID-19
+       
+```{r, include=FALSE}
+# Create new dataframe for Q1 crisis data only
+crisis_Q1 <- crisis %>%
+    filter(month <= 3)
+View(crisis_Q1)
+```
+
+```{r, include=FALSE}
+# Create new dataframe for Q1 info data only
+info_Q1 <- crisis %>%
+    filter(month <= 3)
+View(info_Q1)
+```
+
+# Number of Contacts
+
+### Information Line Contacts
+
+```{r}
+# Frequencies for number of info line contacts per month (Q1)
+info_Q1 %>%
+    tabyl(month) %>%
+    adorn_pct_formatting(digits=1, rounding="half up")
+```
+
+### Crisis Line Contacts
+
+```{r}
+# Frequencies for number of crisis line contacts per month (Q1)
+crisis_Q1 %>%
+    tabyl(month) %>%
+    adorn_pct_formatting(digits=1, rounding="half up")
+```
+
+
+# Overall Demographics
+
+### Gender of Information Line Contacts
+
+```{r}
+# Gender of Contacts
+info_Q1 %>%
+    tabyl(Gender) %>%
+    adorn_pct_formatting(digits=1, rounding="half up")
+```
+
+
+### Gender of Crisis Line Contacts
+
+```{r}
+# Gender of Contacts
+crisis_Q1 %>%
+    tabyl(Gender) %>%
+    adorn_pct_formatting(digits=1, rounding="half up")
+```
